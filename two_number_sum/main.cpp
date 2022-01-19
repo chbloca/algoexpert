@@ -11,7 +11,7 @@
 #include <vector>
 using namespace std;
 
-vector<int> twoNumberSum(vector<int>& array, int& targetSum) {
+vector<int> twoNumberSum(vector<int> array, int targetSum) {
     // Write your code here.
     // we do not iterate on the last item as there is no latter numbers to compare
     for (int i = 0; i < array.size() - 1; i++) {
@@ -29,14 +29,9 @@ vector<int> twoNumberSum(vector<int>& array, int& targetSum) {
 }
 
 int main () {
-    vector<int> array {3, 5, -4, 8, 11, 1, -1, 6};
-    int targetSum = 10;
+    vector<int> output = twoNumberSum({3, 5, -4, 8, 11, 1, -1, 6}, 10);
 
-    vector<int> result;
-
-    result = twoNumberSum(array, targetSum);
-
-    for (auto& i: result) {
+    for (auto& i: output) {
         cout << i << endl;
     }
 }
