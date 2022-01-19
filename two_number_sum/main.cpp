@@ -13,16 +13,16 @@ using namespace std;
 
 vector<int> twoNumberSum(vector<int>& array, int& targetSum) {
   // Write your code here.
-	vector<int> result;
-	for (int i = 0; i < array.size(); i++) {
-		for (int j = 0; j < array.size(); j++) {
-			if ((i != j) && (array[i] + array[j] == targetSum)) {
-                result.push_back(array[i]);
-                result.push_back(array[j]);             
+    for (int i = 0; i < array.size(); i++) {
+        int firstNum = array[i];
+        for (int j = 0; j < array.size(); j++) {
+            int secondNum = array[j];
+            if (array[i] + array[j] == targetSum) {
+                return vector<int> {firstNum, secondNum};             
             }
-		}
-	}
-  return result;
+        }
+    }
+    return {};
 }
 
 int main () {
