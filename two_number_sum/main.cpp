@@ -13,6 +13,7 @@ using namespace std;
 
 vector<int> twoNumberSum(vector<int> array, int targetSum) {
     // Write your code here.
+    // O(n^2) time | O(1) space
     // we do not iterate on the last item as there is no latter numbers to compare
     for (int i = 0; i < array.size() - 1; i++) {
         int firstNum = array[i];
