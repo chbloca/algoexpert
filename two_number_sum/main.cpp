@@ -12,10 +12,13 @@
 using namespace std;
 
 vector<int> twoNumberSum(vector<int>& array, int& targetSum) {
-  // Write your code here.
-    for (int i = 0; i < array.size(); i++) {
+    // Write your code here.
+    // we do not iterate on the last item as there is no latter numbers to compare
+    for (int i = 0; i < array.size() - 1; i++) {
         int firstNum = array[i];
-        for (int j = 0; j < array.size(); j++) {
+        // we initialize j to the following ith number to avoid duplicated results
+        // the computations are made on an upper half matrix
+        for (int j = i + 1; j < array.size(); j++) {
             int secondNum = array[j];
             if (array[i] + array[j] == targetSum) {
                 return vector<int> {firstNum, secondNum};             
