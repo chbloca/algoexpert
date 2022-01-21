@@ -45,32 +45,68 @@ using namespace std;
 // to the class.
 class BST {
 public:
-  int value;
-  BST *left;
-  BST *right;
+    int value;
+    BST *left;
+    BST *right;
 
-  BST(int val) {
-    value = val;
-    left = nullptr;
-    right = nullptr;
-  }
+    BST(int val) {
+        value = val;
+        left = nullptr;
+        right = nullptr;
+    }
 
-  BST &insert(int val) {
-    // Write your code here.
-    // Do not edit the return statement of this method.
-    return *this;
-  }
+    BST &insert(int val) {
+        // Write your code here.
+        // Do not edit the return statement of this method.
+        // Average case (symmetrical tree): O(log n) time | O(1) space
+        // Worst case (single rooted tree): O(n) time | O(1) space
+        BST *currentNode = this;
+        while (true) {
+            if (val < currentNode->value) {
+                if (currentNode->left == nullptr) {
+                    BST *newNode = new BST(val);
+                    currentNode->left = newNode;
+                    break;
+                } else {
+                    currentNode = currentNode->left;
+                }
+            } else {
+                if (currentNode->right == nullptr) {
+                    BST *newNode = new BST(val);
+                    currentNode->right = newNode;
+                    break;
+                } else {
+                    currentNode = currentNode->right;
+                }
+            }
+        }
 
-  bool contains(int val) {
-    // Write your code here.
-    return false;
-  }
+        return *this; // this is to enable chained calls of the method
+    }
 
-  BST &remove(int val) {
-    // Write your code here.
-    // Do not edit the return statement of this method.
-    return *this;
-  }
+    // Average case (symmetrical tree): O(log n) time | O(1) space
+    // Worst case (single rooted tree): O(n) time | O(1) space
+    bool contains(int val) {
+        // Write your code here.
+        BST *currentNode = this;
+        while (currentNode != nullptr) {
+            if (val < currentNode->value) {
+                currentNode = currentNode->left;
+            } else if (val > currentNode->value) {
+                currentNode = currentNode->right;
+            } else {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    BST &remove(int val) {
+        // Write your code here.
+        // Do not edit the return statement of this method.
+        return *this;
+    }
 };
 
 int main () {
