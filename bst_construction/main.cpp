@@ -102,9 +102,32 @@ public:
         return false;
     }
 
-    BST &remove(int val) {
+    BST &remove(int val, BST *parentNode = nullptr) {
         // Write your code here.
         // Do not edit the return statement of this method.
+        BST *currentNode = this;
+        while (currentNode != nullptr) {
+            if (value < currentNode->value) {
+                parentNode = currentNode;
+                currentNode = currentNode->left;
+            } else if (value > currentNode->value) {
+                parentNode = currentNode;
+                currentNode = currentNode->right;
+            } else {
+                if (currentNode->left != nullptr && currentNode->right != nullptr) {
+
+                } else if (parentNode == nullptr) {
+
+                } else if (parentNode->left == currentNode) {
+                    parentNode->left = currentNode->left != nullptr ? currentNode->left : currentNode->right;
+                } else if (parentNode->right == currentNode) {
+                    parentNode->right = currentNode->left != nullptr ? currentNode->left : currentNode->right;
+                }
+
+            }
+        }
+
+
         return *this;
     }
 };
