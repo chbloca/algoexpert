@@ -14,6 +14,7 @@
  */
 
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -23,13 +24,37 @@ public:
   BST *left;
   BST *right;
 
-  BST(int val);
-  BST &insert(int val);
+  BST(int val) {
+      value = val;
+      left = nullptr;
+      right = nullptr;
+  }
 };
 
+int findClosestValueInBstHelper(BST *tree, int target, int closestValue) {
+  BST *currentNode = tree;
+  while (currentNode != nullptr) {
+    // We must stop the recursion once we reach the bottom of the tree (a leaf)
+    if (abs(target - closestValue) > abs(target - currentNode->value))
+      closestValue = currentNode->value;
+    
+    if (target < currentNode->value) {
+      currentNode = currentNode->left;
+    } else if (target > currentNode->value) {
+      currentNode = currentNode->right;
+    } else {
+      break;
+    }
+  }
+  return closestValue;
+}
+
 int findClosestValueInBst(BST *tree, int target) {
-  // Write your code here.
-  return -1;
+    // Write your code here.
+    // Average case (symmetrical tree): O(log n) time | O(1) space
+    // Worst case (single rooted tree): O(n) time | O(1) space
+    // As we want to keep track of the closes value variable, we will use a helper method
+    return findClosestValueInBstHelper(tree, target, tree->value);
 }
 
 int main () {
