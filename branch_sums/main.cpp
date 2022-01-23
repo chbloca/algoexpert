@@ -7,7 +7,6 @@
  *    4     5 6     7
  *  /  \   /
  * 8    9 10      
- * target = 12
  * 
  * Sample Output
  * [15, 16, 18, 10, 11]
@@ -37,9 +36,31 @@ public:
   }
 };
 
+void calculateBranchSums(BinaryTree *node, int runningSum, vector<int> &sums) {
+    if (node == nullptr)
+        return;
+
+    int newRunningSum = runningSum + node->value;
+
+    if (node->left == nullptr && node->right == nullptr) {
+        sums.push_back(newRunningSum);
+        return;
+    }
+
+    calculateBranchSums(node->left, newRunningSum, sums);
+    calculateBranchSums(node->right, newRunningSum, sums);
+}
+
 vector<int> branchSums(BinaryTree *root) {
-  // Write your code here.
-  return {};
+    // Write your code here.
+    // O(n) time | O(k) space
+    // n is the number of nodes in the tree
+    // k is the number of leafs
+    // k < n
+
+    vector<int> sums;
+    calculateBranchSums(root, 0, sums);
+    return sums;
 }
 
 int main () {
