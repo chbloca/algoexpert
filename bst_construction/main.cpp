@@ -102,31 +102,65 @@ public:
         return false;
     }
 
+    int getMinValue() {
+        BST *currentNode = this;
+        while (currentNode->left != nullptr) {
+            currentNode = currentNode->left;
+        }
+        return currentNode->value;
+    }
+
+    // Average case (symmetrical tree): O(log n) time | O(1) space
+    // Worst case (single rooted tree): O(n) time | O(1) space
     BST &remove(int val, BST *parentNode = nullptr) {
         // Write your code here.
         // Do not edit the return statement of this method.
         BST *currentNode = this;
         while (currentNode != nullptr) {
-            if (value < currentNode->value) {
+            if (val < currentNode->value) {
                 parentNode = currentNode;
                 currentNode = currentNode->left;
-            } else if (value > currentNode->value) {
+            } else if (val > currentNode->value) {
                 parentNode = currentNode;
                 currentNode = currentNode->right;
             } else {
                 if (currentNode->left != nullptr && currentNode->right != nullptr) {
-
+                    // edge case node has two children
+                    // we want to find the smallest value in the right subtree
+                    currentNode->value = currentNode->right->getMinValue();
+                    currentNode->right->remove(currentNode->value, currentNode);
                 } else if (parentNode == nullptr) {
-
+                    // edge case node is root
+                    if (currentNode->left != nullptr) {
+                        currentNode->value = currentNode->left->value;
+                        currentNode->right = currentNode->left->right;
+                        currentNode->left = currentNode->left->left;
+                    } else if (currentNode->right != nullptr) {
+                        currentNode->value = currentNode->right->value;
+                        currentNode->left = currentNode->right->left;
+                        currentNode->right = currentNode->right->right; 
+                    } else {
+                        currentNode == nullptr;
+                    }
                 } else if (parentNode->left == currentNode) {
+                    //   5
+                    //  /
+                    // 3
+                    //  \
+                    //   4 or nullptr
+                    //
+                    //   5
+                    //  /
+                    // 4 or nullptr
+                    //
+                    //
                     parentNode->left = currentNode->left != nullptr ? currentNode->left : currentNode->right;
                 } else if (parentNode->right == currentNode) {
                     parentNode->right = currentNode->left != nullptr ? currentNode->left : currentNode->right;
                 }
-
+                break;
             }
         }
-
 
         return *this;
     }
