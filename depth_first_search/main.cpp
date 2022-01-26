@@ -28,9 +28,29 @@ public:
 
   Node(string str) { name = str; }
 
-  vector<string> depthFirstSearch(vector<string> *array) {
+  // Version 1
+  // Cons: You cannot see the value of array during the debugging
+//   vector<string> depthFirstSearch(vector<string> *array) {
+//     // Write your code here.
+//     // O(v + e) time [v: vertices = nodes, e: edges = relationships]
+//     // O(v) space
+//     array->push_back(this->name);
+//     for (int i = 0; i < this->children.size(); i++) {
+//         children[i]->depthFirstSearch(array);
+//     }
+//     return *array;
+//   }
+
+  // Version 2
+  vector<string> depthFirstSearch(vector<string> &array) {
     // Write your code here.
-    return {};
+    // O(v + e) time [v: vertices = nodes, e: edges = relationships]
+    // O(v) space
+    array.push_back(this->name);
+    for (int i = 0; i < this->children.size(); i++) {
+        children[i]->depthFirstSearch(array);
+    }
+    return array;
   }
 
   Node *addChild(string name) {
@@ -50,7 +70,10 @@ int main () {
 
     vector<string> inputArray {};
 
-    vector<string> result = graph.depthFirstSearch(&inputArray);
+    // Version 1
+    // vector<string> result = graph.depthFirstSearch(&inputArray);
+    // Version 2
+    vector<string> result = graph.depthFirstSearch(inputArray);
 
     for (auto &i : result) {
         cout << i << endl;
