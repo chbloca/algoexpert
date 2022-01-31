@@ -24,8 +24,20 @@ LinkedList *addMany(LinkedList *linkedList, vector<int> values);
 vector<int> getNodesInArray(LinkedList *linkedList);
 
 LinkedList *removeDuplicatesFromLinkedList(LinkedList *linkedList) {
-  // Write your code here.
-  return nullptr;
+    // Write your code here.
+    // O(n) time as we look through all the node just once
+    // O(1) space as we mutate the variable without the need of using an auxiliar variable
+    LinkedList *currentNode = linkedList;
+    while (currentNode != nullptr) {
+        LinkedList *nextDistinctNode = currentNode->next;
+        while (nextDistinctNode != nullptr && nextDistinctNode->value == currentNode->value) {
+            nextDistinctNode = nextDistinctNode->next;
+        }
+        currentNode->next = nextDistinctNode;
+        currentNode = nextDistinctNode;
+    }
+    
+    return linkedList;
 }
 
 int main () {
