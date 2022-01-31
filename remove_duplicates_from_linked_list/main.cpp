@@ -11,9 +11,6 @@
 #include <assert.h>
 using namespace std;
 
-LinkedList *addMany(LinkedList *linkedList, vector<int> values);
-vector<int> getNodesInArray(LinkedList *linkedList);
-
 // This is an input struct. Do not edit.
 class LinkedList {
 public:
@@ -21,9 +18,10 @@ public:
     LinkedList *next = nullptr;
 
     LinkedList(int value) { this->value = value; }
-
-    
 };
+
+LinkedList *addMany(LinkedList *linkedList, vector<int> values);
+vector<int> getNodesInArray(LinkedList *linkedList);
 
 LinkedList *removeDuplicatesFromLinkedList(LinkedList *linkedList) {
   // Write your code here.
