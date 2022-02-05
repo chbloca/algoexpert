@@ -28,7 +28,7 @@ bool isPalindrome(string str) {
     int leftIdx = 0;
     int rightIdx = str.size() - 1;
 
-    while (leftIdx != rightIdx) {
+    while (leftIdx < rightIdx) { // if !=, it fails for the even character words
         if (str[leftIdx] != str[rightIdx])
             return false;
 
