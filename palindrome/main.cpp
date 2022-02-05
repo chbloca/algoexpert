@@ -10,6 +10,15 @@
 
 using namespace std;
 
+bool helper(string str, int i) {
+    int j = str.length() - 1 - i;
+    return i >= j ? true : str[i] == str[j] && helper(str, i + 1);
+}
+
+bool isPalindromeRecursive(string str) {
+    return helper(str, 0);
+}
+
 bool isPalindrome(string str) {
     // Write your code here.
     // O(n) time
@@ -29,7 +38,9 @@ bool isPalindrome(string str) {
 }
 
 int main () {
-    bool result = isPalindrome("abcdeba");
+    bool resultRecursive = isPalindromeRecursive("abcdcba");
+    bool result = isPalindrome("abcdcba");
 
+    cout << resultRecursive << endl;
     cout << result << endl;
 }
