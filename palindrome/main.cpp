@@ -16,6 +16,8 @@ bool helper(string str, int i) {
 }
 
 bool isPalindromeRecursive(string str) {
+    // O(n) time
+    // O(n) space
     return helper(str, 0);
 }
 
