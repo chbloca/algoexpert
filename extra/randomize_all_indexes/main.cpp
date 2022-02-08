@@ -13,49 +13,31 @@
 
 using namespace std;
 
-int generate_unused_random(vector<int> &array, int idx, vector<int> &idx_array) {
-    // create random number between 0 and size-1 except for i-th
-    srand(time(0));
-    int random_value;
-    while (idx_array.size() < array.size()) {
-        random_value = rand() % array.size();
-        bool isUsed = false;
-
-        for (int &element : idx_array) {
-            if (element == random_value)
-                isUsed = true;
-        }
-
-        if (random_value != idx && !isUsed) {
-            cout << "random value: " << random_value << " at index " << idx << endl;
-            return random_value;
-        }
-    } 
-}
-
 vector<int> randomizer(vector<int> array) {
-    // Write your code here.
-    // O(n^3) time
+    // O(n^2) time
     // O(n) space
     
-    vector<int> usedIndexes;
-    bool indexed = false;
+    srand(time(0));
+    vector<int> temp = array;
 
-    for (int i = 0; i < array.size() / 2 + 1; i++) {
-        cout << "array size: " << array.size() / 2 << endl;
+    if (array.size() == 1) return array;
 
-        int random_value = generate_unused_random(array, i, usedIndexes);
+    for (int i = 0; i < array.size(); i++) {
+        int newPosition = i == 0 ? rand() % array.size() : array.size() - 1;
 
-        swap(array[i], array[random_value]);
-        usedIndexes.push_back(i);
-        usedIndexes.push_back(random_value);
+        while (newPosition == i || temp.at(newPosition) == 999) { /// 999 is a flag, it would be nice to use null value instead
+            newPosition = rand() % array.size();
+        }
+
+        array[i] = temp[newPosition];
+        temp[newPosition] = 999;
     }
     return array;
 }
 
 
 int main () {
-    vector<int> input {0, 1, 2, 3, 4, 5};
+    vector<int> input {0, 1, 2, 5};
     vector<int> result = randomizer(input);
 
     bool dearranged = true;
