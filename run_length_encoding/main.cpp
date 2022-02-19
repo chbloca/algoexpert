@@ -7,12 +7,37 @@
  */
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 string runLengthEncoding(string str) {
   // Write your code here.
-  return "";
+  // O(n) time
+  // O(n) space
+  vector<char> encodedStringCharacters;
+  int currentRunLength = 1;
+
+  for (int i = 1; i < str.length(); i++) {
+    char currentCharacter = str[i];
+    char previousCharacter = str[i - 1];
+
+    if (currentCharacter != previousCharacter || currentRunLength == 9) {
+       encodedStringCharacters.push_back(to_string(currentRunLength)[0]);
+       encodedStringCharacters.push_back(previousCharacter);
+
+       currentRunLength = 0;
+    }
+
+    currentRunLength++;
+  }
+
+  encodedStringCharacters.push_back(to_string(currentRunLength)[0]);
+  encodedStringCharacters.push_back(str[str.length() - 1]);
+
+  string encodedString(encodedStringCharacters.begin(), encodedStringCharacters.end());
+
+  return encodedString;
 }
 
 int main () { 
