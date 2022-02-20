@@ -20,6 +20,8 @@ int powerNaive(int base, int exp) {
 int power(int base, int exp) {
     // O(log n) time
     // O(1) space
+    // power(2, 4) = 2^4 = 1*(2^2)^2
+
     if (exp == 0)
         return 1;
     
