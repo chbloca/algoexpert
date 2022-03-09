@@ -40,10 +40,14 @@ vector<int> spiralTraverse(vector<vector<int>> array) {
       }
 
       for (int col = endCol - 1; col >= startCol; col--) {
+        if (startRow == endRow)
+          break;
         result.push_back(array[endRow][col]);
       }
 
       for (int row = endRow - 1; row > startRow; row--) {
+        if (startCol == endCol)
+          break;
         result.push_back(array[row][startCol]);
       }
 
