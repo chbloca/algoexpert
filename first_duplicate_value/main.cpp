@@ -27,6 +27,19 @@ int firstDuplicateValue(vector<int> array) {
     return -1;    
 }
 
+int firstDuplicateValueEnhanced(vector<int> array) {
+    // O(n) time
+    // O(1) space
+    for (int &value : array) {
+        int absValue = abs(value);
+        if (array[absValue - 1] < 0)
+            return absValue;
+        array[absValue - 1] *= -1;
+    }
+    return -1;    
+}
+
 int main () {
-    int result = firstDuplicateValue({5, 1, 4, 2});
+    int result = firstDuplicateValue({2, 1, 5, 2, 3, 3, 4});
+    int resultEnhanced = firstDuplicateValueEnhanced({2, 1, 5, 2, 3, 3, 4});
 }
